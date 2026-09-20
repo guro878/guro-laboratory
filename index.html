@@ -1,42 +1,98 @@
 
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="am">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Lab Website</title>
+    <title>Guro Laboratory - መመዝገቢያ እና ውጤት ማውጫ</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f6;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .container {
-            text-align: center;
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #2c3e50;
-        }
-        p {
-            color: #7f8c8d;
-            font-size: 1.1rem;
-        }
+        * { box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background-color: #f0f4f8; margin: 0; padding: 20px; color: #333; }
+        .header { text-align: center; padding: 20px; background: #0056b3; color: white; border-radius: 8px; margin-bottom: 20px; }
+        .container { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 600px) { .container { grid-template-columns: 1fr; } }
+        .card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h2 { color: #0056b3; margin-top: 0; border-bottom: 2px solid #f0f4f8; padding-bottom: 10px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+        button { width: 100%; padding: 12px; background: #0056b3; color: white; border: none; border-radius: 4px; font-size: 1rem; cursor: pointer; font-weight: bold; }
+        button:hover { background: #004494; }
+        .result-box { margin-top: 20px; padding: 15px; background: #e3f2fd; border-left: 5px solid #2196f3; display: none; border-radius: 4px; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>እንኳን ወደ ዌብሳይቴ በሰላም መጣችሁ!</h1>
-        <p>ይህ በ GitHub Pages የተሰራው የኔ መጀመሪያ ዌብሳይት ነው።</p>
+
+    <div class="header">
+        <h1>Guro Laboratory (ጉሮ ላብራቶሪ)</h1>
+        <p>የላብራቶሪ ምርመራ መመዝገቢያ እና የውጤት ማውጫ ገጽ</p>
     </div>
+
+    <div class="container">
+        <!-- 1. መመዝገቢያ ፎርም -->
+        <div class="card">
+            <h2>1. የታካሚ መመዝገቢያ</h2>
+            <form id="regForm" onsubmit="registerPatient(event)">
+                <div class="form-group">
+                    <label>ሙሉ ስም</label>
+                    <input type="text" required placeholder="የታካሚውን ስም ያስገቡ">
+                </div>
+                <div class="form-group">
+                    <label>ስልክ ቁጥር</label>
+                    <input type="tel" required placeholder="09...">
+                </div>
+                <div class="form-group">
+                    <label>የምርመራ አይነት</label>
+                    <select>
+                        <option>የደም ምርመራ (Blood Test)</option>
+                        <option>የሽንት ምርመራ (Urine Test)</option>
+                        <option>የኮቪድ ምርመራ (COVID-19 Test)</option>
+                        <option>አጠቃላይ ምርመራ (General Checkup)</option>
+                    </select>
+                </div>
+                <button type="submit">በተሳካ ሁኔታ መዝግብ</button>
+            </form>
+        </div>
+
+        <!-- 2. ውጤት ማውጫ -->
+        <div class="card">
+            <h2>2. የላብራቶሪ ውጤት ማውጫ</h2>
+            <div class="form-group">
+                <label>የታካሚ መለያ ቁጥር (Patient ID)</label>
+                <input type="text" id="patientId" placeholder="ምሳሌ፡ LAB-101">
+            </div>
+            <button onclick="checkResult()">ውጤት ፈልግ</button>
+
+            <!-- ውጤት ማሳያ ሳጥን (ለሙከራ የተቀመጠ) -->
+            <div id="resultDisplay" class="result-box">
+                <strong style="color: #0056b3;">የምርመራ ውጤት፡</strong>
+                <p id="resultText"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function registerPatient(e) {
+            e.preventDefault();
+            alert("ታካሚው በተሳካ ሁኔታ ተመዝግቧል! መለያ ቁጥር፡ LAB-101");
+        }
+
+        function checkResult() {
+            var id = document.getElementById("patientId").value;
+            var display = document.getElementById("resultDisplay");
+            var text = document.getElementById("resultText");
+            
+            if(id.trim() === "LAB-101" || id.trim() === "lab-101") {
+                display.style.display = "block";
+                text.innerHTML = "<strong>ስም:</strong> ዮሐንስ አበበ<br><strong>የምርመራ አይነት:</strong> የደም ምርመራ<br><strong>ውጤት:</strong> Normal (ደህና ነው)";
+            } else if(id.trim() === "") {
+                alert("እባክዎ መለያ ቁጥር ያስገቡ");
+            } else {
+                display.style.display = "block";
+                text.innerHTML = "<span style='color:red;'>ይቅርታ፣ በዚህ መለያ ቁጥር የተመዘገበ የላብራቶሪ ውጤት አልተገኘም።</span>";
+            }
+        }
+    </script>
+
 </body>
 </html>
-U
