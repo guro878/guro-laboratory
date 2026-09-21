@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -19,6 +19,31 @@
       min-height: 100vh;
     }
 
+    /* የላይኛው ባር (ለስልክ ብቻ የሚሆን) */
+    .mobile-header {
+      display: none;
+      width: 100%;
+      background: #ffffff;
+      padding: 15px 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .menu-btn {
+      font-size: 24px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: #1e3a8a;
+      width: auto;
+      padding: 0;
+    }
+
     /* የግራ ጎን ሜኑ (Sidebar) ዲዛይን */
     .sidebar {
       height: 100vh;
@@ -31,6 +56,8 @@
       padding: 20px 10px;
       border-right: 1px solid #e2e8f0;
       box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+      z-index: 99;
+      transition: all 0.3s ease;
     }
 
     .logo-details {
@@ -59,9 +86,10 @@
       margin-bottom: 5px;
       font-size: 15px;
       transition: all 0.3s ease;
+      cursor: pointer;
     }
 
-    .nav-links li a:hover {
+    .nav-links li a:hover, .nav-links li a.active {
       background: #eff6ff;
       color: #3b82f6;
       font-weight: 600;
@@ -76,7 +104,7 @@
       letter-spacing: 1px;
     }
 
-    /* ዋናው መመዝገቢያ ፎርም ያለበት ክፍል (ወደ ቀኝ የተገፋ) */
+    /* ዋናው መመዝገቢያ ፎርም ያለበት ክፍል */
     .main-content {
       margin-left: 260px;
       padding: 40px;
@@ -84,6 +112,18 @@
       display: flex;
       justify-content: center;
       align-items: flex-start;
+      transition: all 0.3s ease;
+    }
+
+    /* ገጾችን ለመቀያየር (Pages View) */
+    .page-section {
+      display: none;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .page-section.active-page {
+      display: block;
     }
 
     .app-container {
@@ -92,7 +132,6 @@
       border-radius: 12px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
       width: 100%;
-      max-width: 600px;
     }
 
     h2 {
@@ -129,7 +168,7 @@
       box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
     }
 
-    button {
+    .submit-btn {
       background-color: #3b82f6;
       color: white;
       border: none;
@@ -142,93 +181,181 @@
       transition: background-color 0.3s;
     }
 
-    button:hover {
+    .submit-btn:hover {
       background-color: #2563eb;
     }
 
-    /* ለስልኮች የሚሆን ማስተካከያ (Responsive) */
+    /* ለስልኮች የሚሆን ማስተካከያ (Responsive Mobile Style) */
     @media (max-width: 768px) {
       body {
         flex-direction: column;
       }
+      .mobile-header {
+        display: flex;
+      }
       .sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
-        border-right: none;
-        border-bottom: 1px solid #e2e8f0;
+        position: fixed;
+        left: -260px; /* በስልክ ሲሆን መጀመሪያ ይደበቃል */
+        top: 60px;
+        height: calc(100vh - 60px);
+        width: 260px;
+      }
+      .sidebar.open {
+        left: 0; /* የበርገር ሜኑ ሲነካ ይወጣል */
       }
       .main-content {
         margin-left: 0;
         width: 100%;
-        padding: 20px;
+        padding: 80px 20px 20px 20px; /* ከላይኛው ባር ጋር እንዳይጋጭ */
       }
     }
   </style>
 </head>
 <body>
 
+  <!-- የላይኛው የሞባይል ባር (☰) -->
+  <div class="mobile-header">
+    <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+    <div class="logo_name" style="font-size: 18px;">🔬 Guro Lab</div>
+    <div style="width: 24px;"></div> <!-- ለዲዛይን ሚዛን -->
+  </div>
+
   <!-- የግራ ጎን ሜኑ (Sidebar) -->
-  <div class="sidebar">
+  <div class="sidebar" id="sidebar">
     <div class="logo-details">
-      <span class="logo_name">Guro Lab</span>
+      <span class="logo_name">🔬 Guro Lab</span>
     </div>
     <ul class="nav-links">
-      <li><a href="#">📊 Dashboard</a></li>
-      <li><a href="#">📥 Reception Flow</a></li>
-      <li><a href="#">💳 Cashier Flow</a></li>
-      <li><a href="#">🤕 Patients</a></li>
-      <li><a href="#">💰 Daily Collection</a></li>
-      <li><a href="#">🖥️ Corporate Receipt</a></li>
-      <li><a href="#">💵 Prepayments</a></li>
-      <li><a href="#">🗂️ Broker Set-Up</a></li>
-      <li><a href="#">📅 Appointments</a></li>
+      <li><a onclick="showPage('dashboard', this)">📊 Dashboard</a></li>
+      <li><a class="active" onclick="showPage('reception', this)">📥 Reception Flow</a></li>
+      <li><a onclick="showPage('cashier', this)">💳 Cashier Flow</a></li>
+      <li><a onclick="showPage('patients', this)">🤕 Patients</a></li>
+      <li><a onclick="showPage('collection', this)">💰 Daily Collection</a></li>
+      <li><a onclick="showPage('corporate', this)">🖥️ Corporate Receipt</a></li>
+      <li><a onclick="showPage('prepayments', this)">💵 Prepayments</a></li>
+      <li><a onclick="showPage('broker', this)">🗂️ Broker Set-Up</a></li>
+      <li><a onclick="showPage('appointments', this)">📅 Appointments</a></li>
       
       <li class="section-title">REPORTS</li>
-      <li><a href="#">👨‍⚕️ Physician List</a></li>
-      <li><a href="#">🗃️ Top Reception</a></li>
-      <li><a href="#">💳 CBO Patient Summary</a></li>
+      <li><a onclick="showPage('physician', this)">👨‍⚕️ Physician List</a></li>
+      <li><a onclick="showPage('top-reception', this)">🗃️ Top Reception</a></li>
+      <li><a onclick="showPage('cbo', this)">💳 CBO Patient Summary</a></li>
       
       <li class="section-title">GURO UTILITIES</li>
-      <li><a href="#">💬 Messaging</a></li>
-      <li><a href="#">📋 ToDo List</a></li>
-      <li><a href="#">📝 Notes</a></li>
+      <li><a onclick="showPage('messaging', this)">💬 Messaging</a></li>
+      <li><a onclick="showPage('todo', this)">📋 ToDo List</a></li>
+      <li><a onclick="showPage('notes', this)">📝 Notes</a></li>
     </ul>
   </div>
 
-  <!-- ዋናው የምዝገባ ፎርም ክፍል -->
+  <!-- ዋናው የይዘት ክፍል -->
   <div class="main-content">
-    <div class="app-container">
-      <h2>Patient Registration</h2>
-      <form>
-        <div class="form-group">
-          <label for="fullName">Full Name</label>
-          <input type="text" id="fullName" placeholder="Enter patient full name" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" placeholder="09... or 07..." required>
-        </div>
-        
-        <div class="form-group">
-          <label for="gender">Gender</label>
-          <select id="gender" required>
-            <option value="">Select Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </select>
-        </div>
-        
-        <div class="form-group">
-          <label for="age">Age</label>
-          <input type="number" id="age" placeholder="Enter age" min="0" required>
-        </div>
-        
-        <button type="submit">Register Patient</button>
-      </form>
+    
+    <!-- 1. Dashboard Section -->
+    <div id="dashboard" class="page-section">
+      <div class="app-container">
+        <h2>📊 Dashboard</h2>
+        <p style="color: #64748b; margin-top: 10px;">Welcome to Guro Lab Overview. Today's statistics will appear here.</p>
+      </div>
     </div>
+
+    <!-- 2. Reception Flow Section (የታካሚ መመዝገቢያ) -->
+    <div id="reception" class="page-section active-page">
+      <div class="app-container">
+        <h2>Patient Registration</h2>
+        <form onsubmit="event.preventDefault(); alert('Patient Registered Successfully!');">
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" placeholder="Enter patient full name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" placeholder="09... or 07..." required>
+          </div>
+          
+          <div class="form-group">
+            <label for="gender">Gender</label>
+            <select id="gender" required>
+              <option value="">Select Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="age">Age</label>
+            <input type="number" id="age" placeholder="Enter age" min="0" required>
+          </div>
+          
+          <button type="submit" class="submit-btn">Register Patient</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- 3. ሌሎች ገጾች (አብነቶች) -->
+    <div id="cashier" class="page-section">
+      <div class="app-container">
+        <h2>💳 Cashier Flow</h2>
+        <p style="color: #64748b; margin-top: 10px;">Payment processing and invoices panel.</p>
+      </div>
+    </div>
+    
+    <div id="patients" class="page-section">
+      <div class="app-container">
+        <h2>🤕 Patients List</h2>
+        <p style="color: #64748b; margin-top: 10px;">View and search registered patients database.</p>
+      </div>
+    </div>
+
+    <!-- ለቀሩት ሜኑዎች ተመሳሳይ አብነት -->
+    <div id="generic-page" class="page-section">
+      <div class="app-container">
+        <h2 id="generic-title">Page</h2>
+        <p style="color: #64748b; margin-top: 10px;">This section is under construction.</p>
+      </div>
+    </div>
+
   </div>
+
+  <!-- ጃቫስክሪፕት (ኮድ መቀያየሪያ እና ሜኑ መክፈቻ) -->
+  <script>
+    // ሜኑ በስልክ ሲሆን መክፈቻ/መዝጊያ
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('open');
+    }
+
+    // ገጾችን ያለ ገጽ መጫን ለመቀያየር (SPA function)
+    function showPage(pageId, element) {
+      // ሁሉንም ገጾች ደብቅ
+      const sections = document.querySelectorAll('.page-section');
+      sections.forEach(sec => sec.classList.remove('active-page'));
+      
+      // ሁሉንም የሜኑ ሊንክ አክቲቭነታቸውን አጥፋ
+      const links = document.querySelectorAll('.nav-links li a');
+      links.forEach(link => link.classList.remove('active'));
+      
+      // የተመረጠውን ሊንክ አክቲቭ አድርግ
+      element.classList.add('active');
+
+      // ገጹን አሳይ
+      const targetPage = document.getElementById(pageId);
+      if (targetPage) {
+        targetPage.classList.add('active-page');
+      } else {
+        // ገጹ ገና ካልተሰራ ወደ አጠቃላይ ገጽ ቀይር
+        const genericPage = document.getElementById('generic-page');
+        document.getElementById('generic-title').innerText = element.innerText;
+        genericPage.classList.add('active-page');
+      }
+
+      // በስልክ ሲሆን ሜኑው ሊንክ ከተነካ በኋላ በራሱ እንዲዘጋ
+      if (window.innerWidth <= 768) {
+        document.getElementById('sidebar').classList.remove('open');
+      }
+    }
+  </script>
 
 </body>
 </html>
