@@ -1,94 +1,10 @@
-                
-  
-  <main class="main-content">
-    
-    <div class="header">
-      <h1>Guro Laboratory (ጉሮ ላቦራቶሪ)</h1>
-      <p>የላቦራቶሪ ምርመራ መመዝገቢያ እና የውጤት ማውጫ ገጽ</p>
-    </div>
 
-    <div class="container">
-      <!-- 1. የታካሚ መመዝገቢያ ፎርም -->
-      <div class="card">
-        <h2>1. የታካሚ መመዝገቢያ (Patient registration)</h2>
-        <form onsubmit="registerPatient(event)">
-          <div class="form-group">
-            <label>ሙሉ ስም (Full name)</label>
-            <input type="text" placeholder="የታካሚውን ሙሉ ስም ያስገቡ" required>
-          </div>
-          <div class="form-group">
-            <label>ስልክ ቁጥር (Phone number)</label>
-            <input type="tel" placeholder="09..." required>
-          </div>
-          <div class="form-group">
-            <label>የምርመራ ዓይነት</label>
-            <select>
-              <option>የደም ምርመራ (Blood Test)</option>
-              <option>የሽንት ምርመራ (Urine Test)</option>
-              <option>የኮቪድ ምርመራ (COVID-19 Test)</option>
-              <option>አጠቃላይ ምርመራ (General Checkup)</option>
-            </select>
-          </div>
-          <button type="submit">በተሳካ ሁኔታ መዝግብ</button>
-        </form>
-      </div>
-
-      <!-- 2. ውጤት ማውጫ -->
-      <div class="card">
-        <h2>2. የላቦራቶሪ ውጤት ማውጫ</h2>
-        <div class="form-group">
-          <label>የታካሚ መለያ ቁጥር (Patient ID)</label>
-          <input type="text" id="patientId" placeholder="ምሳሌ: LAB-101">
-        </div>
-        <button onclick="checkResult()">ውጤት ፈልግ</button>
-
-        <!-- ውጤት ማሳያ ሳጥን (ለሙከራ የተቀመጠ) -->
-        <div id="resultDisplay" class="result-box" style="display: none; margin-top: 20px; padding: 15px; background: #eef5f9; border-radius: 5px;">
-          <strong style="color: #0056b3;">የምርመራ ውጤት:</strong>
-          <p id="resultText" style="margin-top: 5px; font-weight: bold;"></p>
-        </div>
-      </div>
-    </div>
-
-  </main>
-</div>
-
-<!-- ጃቫስክሪፕት (JavaScript) ክፍል -->
-<script>
-function registerPatient(e) {
-  e.preventDefault();
-  alert("ታካሚው በተሳካ ሁኔታ ተመዝግቧል! መለያ ቁጥር: LAB-101");
-}
-
-function checkResult() {
-  var id = document.getElementById("patientId").value;
-  var display = document.getElementById("resultDisplay");
-  var text = document.getElementById("resultText");
-  
-  if(id.trim() === "") {
-    alert("እባክዎ መጀመሪያ የታካሚ መለያ ቁጥር ያስገቡ!");
-    return;
-  }
-  
-  // ለሙከራ የሚሆን ውጤት
-  display.style.display = "block";
-  if(id === "LAB-101") {
-    text.innerHTML = "🔬 ውጤት: ኖርማል (Normal) - ሁሉም ምርመራዎች በደህና ተጠናቀዋል።";
-    text.style.color = "green";
-  } else {
-    text.innerHTML = "❌ ማሳሰቢያ: በዚህ መለያ ቁጥር የተመዘገበ ታካሚ አልተገኘም።";
-    text.style.color = "red";
-  }
-}
-</script>
-
-</body>
-</html>
-<html lang="am">
+   html<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guro Laboratory - መመዝገቢያ እና ውጤት ማውጫ</title>
+  <title>Guro Laboratory Management System</title>
   <style>
     /* አጠቃላይ ገጽታ */
     * {
@@ -98,7 +14,186 @@ function checkResult() {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-  <body>
+    body {
+      background-color: #f0f4f8;
+    }
+
+    .app-container {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* የጎን ሜኑ (Sidebar) ዲዛይን */
+    .sidebar {
+      width: 260px;
+      background-color: #eef5f9;
+      border-right: 1px solid #d3e2ed;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .sidebar-brand {
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #0056b3;
+      border-bottom: 1px solid #d3e2ed;
+    }
+
+    .sidebar-menu {
+      flex: 1;
+      overflow-y: auto;
+      padding: 15px 0;
+    }
+
+    .sidebar-menu ul {
+      list-style: none;
+    }
+
+    .sidebar-menu li a {
+      display: flex;
+      align-items: center;
+      padding: 12px 20px;
+      color: #334e68;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .sidebar-menu li a:hover, .sidebar-menu li.active a {
+      background-color: #dbeafe;
+      color: #0056b3;
+    }
+
+    .sidebar-menu li a .icon {
+      margin-right: 12px;
+      font-size: 18px;
+    }
+
+    .menu-heading {
+      padding: 20px 20px 8px 20px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #627d98;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ዋናው የይዘት ክፍል (Main Content) */
+    .main-content {
+      flex: 1;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .header {
+      text-align: center;
+      padding: 20px;
+      background-color: #0056b3;
+      color: white;
+      border-radius: 8px;
+      margin-bottom: 25px;
+    }
+
+    .header h1 {
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* የፎርም ካርዶች ዲዛይን */
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      margin-bottom: 25px;
+    }
+
+    .card h2 {
+      color: #0056b3;
+      margin-top: 0;
+      border-bottom: 2px solid #f0f4f8;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: #334e68;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #d3e2ed;
+      border-radius: 4px;
+      font-size: 15px;
+      background-color: #fcfdfe;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #0056b3;
+      box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.1);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #0056b3;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    button:hover {
+      background-color: #004494;
+    }
+
+    .result-box {
+      margin-top: 20px;
+      padding: 15px;
+      background: #eef5f9;
+      border-radius: 5px;
+      border-left: 4px solid #0056b3;
+    }
+
+    /* ለሞባይል ስክሪን ማስተካከያ */
+    @media (max-width: 768px) {
+      .app-container {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #d3e2ed;
+      }
+      .main-content {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
 
 <div class="app-container">
   <!-- የጎን ሜኑ (Sidebar) -->
@@ -110,7 +205,6 @@ function checkResult() {
     
     <nav class="sidebar-menu">
       <ul>
-        <!-- እያንዳንዱ ሊንክ switchTab() የሚለውን ፈንክሽን ይጠራል -->
         <li id="menu-dashboard" class="menu-item active"><a href="#" onclick="switchTab('dashboard')"><span class="icon">📊</span> Dashboard</a></li>
         <li id="menu-reception" class="menu-item"><a href="#" onclick="switchTab('reception')"><span class="icon">📥</span> Reception Flow</a></li>
         <li id="menu-cashier" class="menu-item"><a href="#" onclick="switchTab('cashier')"><span class="icon">💰</span> Cashier Flow</a></li>
@@ -164,11 +258,10 @@ function checkResult() {
     <!-- 2. RECEPTION / PATIENTS TAB -->
     <div id="tab-reception" class="tab-content" style="display: none;">
       <div class="header">
-        <h1>Guro Laboratory - Reception Flow</h1>
+        <h1>Guro Laboratory</h1>
         <p>Laboratory test registration and results page</p>
       </div>
       <div class="container">
-        <!-- 1. የታካሚ መመዝገቢያ ፎርም -->
         <div class="card">
           <h2>1. Patient registration</h2>
           <form onsubmit="registerPatient(event)">
@@ -193,7 +286,6 @@ function checkResult() {
           </form>
         </div>
 
-        <!-- 2. ውጤት ማውጫ -->
         <div class="card">
           <h2>2. Laboratory results index</h2>
           <div class="form-group">
@@ -222,226 +314,6 @@ function checkResult() {
           <form onsubmit="processPayment(event)">
             <div class="form-group">
               <label>Patient ID / Name</label>
-              <input type="text" placeholder="Enter Patient ID or Name" required>
-            </div>
-            <div class="form-group">
-              <label>Amount Due (ETB)</label>
-              <input type="number" placeholder="0.00" required>
-            </div>
-            <div class="form-group">
-              <label>Payment Method</label>
-              <select>
-                <option>Cash</option>
-                <option>CBE Birr</option>
-                <option>Telebirr</option>
-                <option>Bank Transfer</option>
-              </select>
-            </div>
-            <button type="submit" style="background-color: #28a745;">Confirm Payment</button>
-          </form>
-        </div>
-      </div>
-    </div>
-
-    <!-- 4. UNDER CONSTRUCTION TAB (ለቀሪዎቹ ሊንኮች ጊዜያዊ ማሳያ) -->
-    <div id="tab-under-construction" class="tab-content" style="display: none;">
-      <div class="header" style="background-color: #6c757d;">
-        <h1>Feature Coming Soon</h1>
-        <p>This module is under development</p>
-      </div>
-      <div class="container">
-        <div class="card" style="text-align: center; padding: 50px;">
-          <span style="font-size: 50px;">🛠️</span>
-          <h2 style="margin-top: 20px; color: #6c757d;">Under Construction</h2>
-          <p style="color: #777; margin-top: 10px;">We are currently working on this feature. It will be available soon!</p>
-        </div>
-      </div>
-    </div>
-
-  </main>
-</div>
-
-<!-- ጃቫስክሪፕት (JavaScript) ክፍል -->
-<script>
-// 1. የጎን ሜኑ ሊንኮችን ለመቀያየር የሚያገለግል ፈንክሽን
-function switchTab(tabId) {
-  // ሁሉንም የይዘት ገጾች ደብቅ
-  var contents = document.querySelectorAll('.tab-content');
-  contents.forEach(function(content) {
-    content.style.display = 'none';
-  });
+Use code with caution.Amount Due (ETB)Payment MethodCashCBE BirrTelebirrBank TransferConfirm PaymentFeature Coming SoonThis module is under development🛠️Under ConstructionWe are currently working on this feature. It will be available soon!function switchTab(tabId) {var contents = document.querySelectorAll('.tab-content');contents.forEach(function(content) {content.style.display = 'none';});var menuItems = document.querySelectorAll('.menu-item');menuItems.forEach(function(item) {item.classList.remove('active');});document.getElementById('tab-' + tabId).style.display = 'block';if (tabId === 'reception') {document.getElementById('menu-reception').classList.add('active');document.getElementById('menu-patients').classList.add('active');} else if (tabId === 'cashier') {document.getElementById('menu-cashier').classList.add('active');} else if (tabId === 'dashboard') {document.getElementById('menu-dashboard').classList.add('active');} else {// ለቀሪዎቹ ሊንኮች active ምልክት እንዲይዝevent.currentTarget.parentElement.classList.add('active');}}function registerPatient(e) {e.preventDefault();alert("Patient registered successfully! ID: LAB-101");}function checkResult() {var id = document.getElementById("patientId").value;var display = document.getElementById("resultDisplay");var text = document.getElementById("resultText");if(id.trim() === "") {alert("Please enter a patient ID first!");return;}display.style.display = "block";if(id === "LAB-101") {text.innerHTML = "🔬 Result: Normal - All tests completed successfully.";text.style.color = "green";} else {text.innerHTML = "❌ Notice: No patient found with this ID.";text.style.color = "red";}}function processPayment(e) {e.preventDefault();alert("Payment processed su
+         
   
-  // ሁሉንም የሜኑ ሊንኮች ላይ "active" የሚለውን ክፍል አጥፋ
-  var menuItems = document.querySelectorAll('.menu-item');
-  menuItems.forEach(function(item) {
-    item.classList.remove('active');
-  });
-  
-  // የተመረጠውን ገጽ ብቻ አሳይ
-  document.getElementById('tab-' + tabId).style.display = 'block';
-  
-  // ለተመረጠው ሊንክ የሰማያዊ ከለር ምልክት (active) ስጥ
-  if (tabId === 'reception') {
-    document.getElementById('menu-reception').classList.add('active');
-  } else if (tabId === 'cashier') {
-    document.getElementById('menu-cashier').classList.add('active');
-  } else if (tabId === 'dashboard') {
-    document.getElementById('menu-dashboard').classList.add('active');
-  }
-}
-
-// 2. የታካሚ መመዝገቢያ ፈንክሽን
-function registerPatient(e) {
-  e.preventDefault();
-  alert("Patient registered successfully! ID: LAB-101");
-}
-
-// 3. የውጤት መፈለጊያ ፈንክሽን
-function checkResult() {
-  var id = document.getElementById("patientId").value;
-  var display = document.getElementById("resultDisplay");
-  var text = document.getElementById("resultText");
-  
-  if(id.trim() === "") {
-    alert("Please enter a patient ID first!");
-    return;
-  }
-  
-  display.style.display = "block";
-  if(id === "LAB-101") {
-    text.innerHTML = "🔬 Result: Normal - All tests completed successfully.";
-    text.style.color = "green";
-  } else {
-    text.innerHTML = "❌ Notice: No patient found with this ID.";
-    text.style.color = "red";
-  }
-}
-
-// 4. የክፍያ መቀበያ ፈንክሽን
-function processPayment(e) {
-  e.preventDefault();
-  alert("Payment processed successfully! Receipt printed.");
-}
-</script>
-
-</body>
-Use code with caution.ይህንን ሙሉ ኮድ በቦታው ተክተው Commit ያድርጉት። አሁን ድረ-ገጹን ሲከፍቱት መጀመሪያ Dashboard ይከፈታል፤ ከዚያም በግራ በኩል Reception Flow ወይም Cashier Flow ሲነኩ ገጹ ሳይጠፋ ፎርሞቹ ይቀያየራሉ።ኮዱን ከጫኑ በኋላ ይሞክሩትና:የሜኑ ሊንኮቹ በትክክል እየቀያየሩ መጡ?ቀጥሎ በሊንኮቹ ውስጥ የቀሩትን እንደ ToDo List ወይም Notes ያሉትን ክፍሎች እንሥራ ወይስ ሌላ የምንጨምረው ፎርም አለ?ከቦዲ እስከ ቦዲ ድረስ ነው
-
-
-<div class="app-container">
-  <!-- የጎን ሜኑ (Sidebar) -->
-  <aside class="sidebar">
-    <div class="sidebar-brand">
-      <span class="brand-icon">🔬</span>
-      <h2>Guro Lab</h2>
-    </div>
-    
-    <nav class="sidebar-menu">
-      <ul>
-        <li class="active"><a href="#dashboard"><span class="icon">📊</span> Dashboard</a></li>
-        <li><a href="#reception"><span class="icon">📥</span> Reception Flow</a></li>
-        <li><a href="#cashier"><span class="icon">💰</span> Cashier Flow</a></li>
-        <li><a href="#patients"><span class="icon">🤒</span> Patients</a></li>
-        <li><a href="#daily-collection"><span class="icon">💵</span> Daily Collection</a></li>
-        <li><a href="#corporate-receipt"><span class="icon">🖥️</span> Corporate Receipt</a></li>
-        <li><a href="#prepayments"><span class="icon">💳</span> Prepayments</a></li>
-        <li><a href="#broker"><span class="icon">🤝</span> Broker Set-Up</a></li>
-        <li><a href="#appointments"><span class="icon">📅</span> Appointments</a></li>
-        
-        <li class="menu-heading">REPORTS</li>
-        <li><a href="#physician"><span class="icon">👨‍⚕️</span> Physician List</a></li>
-        <li><a href="#top-reception"><span class="icon">🏆</span> Top Reception</a></li>
-        <li><a href="#cbo"><span class="icon">🪪</span> CBO Patient Summary</a></li>
-        
-        <li class="menu-heading">GURO UTILITIES</li>
-        <li><a href="#messaging"><span class="icon">💬</span> Messaging</a></li>
-        <li><a href="#todo"><span class="icon">📋</span> ToDo List</a></li>
-        <li><a href="#notes"><span class="icon">📝</span> Notes</a></li>
-      </ul>
-    </nav>
-  </aside>
-
-  <!-- ዋናው የይዘት ክፍል (Main Content) -->
-  <main class="main-content">
-    
-    <div class="header">
-      <h1>Guro Laboratory (ጉሮ ላቦራቶሪ)</h1>
-      <p>የላቦራቶሪ ምርመራ መመዝገቢያ እና የውጤት ማውጫ ገጽ</p>
-    </div>
-
-    <div class="container">
-      <!-- 1. የታካሚ መመዝገቢያ ፎርም -->
-      <div class="card">
-        <h2>1. የታካሚ መመዝገቢያ (Patient registration)</h2>
-        <form onsubmit="registerPatient(event)">
-          <div class="form-group">
-            <label>ሙሉ ስም (Full name)</label>
-            <input type="text" placeholder="የታካሚውን ሙሉ ስም ያስገቡ" required>
-          </div>
-          <div class="form-group">
-            <label>ስልክ ቁጥር (Phone number)</label>
-            <input type="tel" placeholder="09..." required>
-          </div>
-          <div class="form-group">
-            <label>የምርመራ ዓይነት</label>
-            <select>
-              <option>የደም ምርመራ (Blood Test)</option>
-              <option>የሽንት ምርመራ (Urine Test)</option>
-              <option>የኮቪድ ምርመራ (COVID-19 Test)</option>
-              <option>አጠቃላይ ምርመራ (General Checkup)</option>
-            </select>
-          </div>
-          <button type="submit">በተሳካ ሁኔታ መዝግብ</button>
-        </form>
-      </div>
-
-      <!-- 2. ውጤት ማውጫ -->
-      <div class="card">
-        <h2>2. የላቦራቶሪ ውጤት ማውጫ</h2>
-        <div class="form-group">
-          <label>የታካሚ መለያ ቁጥር (Patient ID)</label>
-          <input type="text" id="patientId" placeholder="ምሳሌ: LAB-101">
-        </div>
-        <button onclick="checkResult()">ውጤት ፈልግ</button>
-
-        <!-- ውጤት ማሳያ ሳጥን -->
-        <div id="resultDisplay" class="result-box" style="display: none;">
-          <strong style="color: #0056b3;">የምርመራ ውጤት:</strong>
-          <p id="resultText" style="margin-top: 5px; font-weight: bold;"></p>
-        </div>
-      </div>
-    </div>
-
-  </main>
-</div>
-
-<!-- ጃቫስክሪፕት (JavaScript) ክፍል -->
-<script>
-function registerPatient(e) {
-  e.preventDefault();
-  alert("ታካሚው በተሳካ ሁኔታ ተመዝግቧል! መለያ ቁጥር: LAB-101");
-}
-
-function checkResult() {
-  var id = document.getElementById("patientId").value;
-  var display = document.getElementById("resultDisplay");
-  var text = document.getElementById("resultText");
-  
-  if(id.trim() === "") {
-    alert("እባክዎ መጀመሪያ የታካሚ መለያ ቁጥር ያስገቡ!");
-    return;
-  }
-  
-  display.style.display = "block";
-  if(id === "LAB-101") {
-    text.innerHTML = "🔬 ውጤት: ኖርማል (Normal) - ሁሉም ምርመራዎች በደህና ተጠናቀዋል።";
-    text.style.color = "green";
-  } else {
-    text.innerHTML = "❌ ማሳሰቢያ: በዚህ መለያ ቁጥር የተመዘገበ ታካሚ አልተገኘም።";
-    text.style.color = "red";
-  }
-}
-</script>
-
-</body>
-</html>
