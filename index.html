@@ -1,5 +1,4 @@
-
-!DOCTYPE html>
+html>
 <html lang="am">
 <head>
     <meta charset="UTF-8">
@@ -9,126 +8,7 @@
     ለአጠቃላይ ገጹ የተቀመጠ መዋቅር */
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-body {
-  background-color: #f0f4f8;
-}
-
-.app-container {
-  display: flex;
-  min-height: 100vh;
-}
-
-/* የጎን ሜኑ (Sidebar) ዲዛይን */
-.sidebar {
-  width: 260px;
-  background-color: #eef5f9;
-  border-right: 1px solid #d3e2ed;
-  display: flex;
-  flex-direction: column;
-}
-
-.sidebar-brand {
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #0056b3;
-  border-bottom: 1px solid #d3e2ed;
-}
-
-.sidebar-menu {
-  flex: 1;
-  overflow-y: auto;
-  padding: 15px 0;
-}
-
-.sidebar-menu ul {
-  list-style: none;
-}
-
-.sidebar-menu li a {
-  display: flex;
-  align-items: center;
-  padding: 12px 20px;
-  color: #334e68;
-  text-decoration: none;
-  font-size: 15px;
-  font-weight: 500;
-  transition: all 0.2s ease;
-}
-
-.sidebar-menu li a:hover, .sidebar-menu li.active a {
-  background-color: #dbeafe;
-  color: #0056b3;
-}
-
-.sidebar-menu li a .icon {
-  margin-right: 12px;
-  font-size: 18px;
-}
-
-/* የርዕስ ክፍሎች (REPORTS / UTILITIES) */
-.menu-heading {
-  padding: 20px 20px 8px 20px;
-  font-size: 12px;
-  font-weight: 700;
-  color: #627d98;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-/* ዋናው መረጃ መሙያ ክፍል */
-.main-content {
-  flex: 1;
-  padding: 30px;
-  overflow-y: auto;
-}
-
-/* ለሞባይል ስክሪን የሚሆን ማስተካከያ (Responsive) */
-@media (max-width: 768px) {
-  .app-container {
-    flex-direction: column;
-  }
-  .sidebar {
-    width: 100%;
-    border-right: none;
-    border-bottom: 1px solid #d3e2ed;
-  }
-}
-    </style>
-</head>
-<body>
-
-    <div class="header">div class="app-container">
-  <!-- የጎን ሜኑ (Sidebar) -->
-  <aside class="sidebar">
-    <div class="sidebar-brand">
-      <span class="brand-icon">🔬</span>
-      <h2>Guro Lab</h2>
-    </div>
-    
-    <nav class="sidebar-menu">
-      <ul>
-        <li class="active"><a href="#dashboard"><span class="icon">📊</span> Dashboard</a></li>
-        <li><a href="#reception"><span class="icon">📥</span> Reception Flow</a></li>
-        <li><a href="#cashier"><span class="icon">💰</span> Cashier Flow</a></li>
-        <li><a href="#patients"><span class="icon">🤒</span> Patients</a></li>
-        <li><a href="#daily-collection"><span class="icon">💵</span> Daily Collection</a></li>
-        <li><a href="#corporate-receipt"><span class="icon">🖥️</span> Corporate Receipt</a></li>
-        <li><a href="#prepayments"><span class="icon">💳</span> Prepayments</a></li>
-        <li><a href="#broker"><span class="icon">🤝</span> Broker Set-Up</a></li>
-        <li><a href="#appointments"><span class="icon">📅</span> Appointments</a></li>
-        
-        <li class="menu-heading">REPORTS</li>
-        <li><a href="#physician"><span class="icon">👨‍⚕️</span> Physician List</a></li>
-        <li><a href="#top-reception"><span class="icon">🏆</span> Top Reception</a></li>
-        <li><a href="#cbo"><span class="icon">🪪</span> CBO Patient Summary</a></li>
-        
+         
         <li class="menu-heading">GURO UTILITIES</li>
         <li><a href="#messaging"><span class="icon">💬</span> Messaging</a></li>
         <li><a href="#todo"><span class="icon">📋</span> ToDo List</a></li>
@@ -207,10 +87,4 @@ body {
                 alert("እባክዎ መለያ ቁጥር ያስገቡ");
             } else {
                 display.style.display = "block";
-                text.innerHTML = "<span style='color:red;'>ይቅርታ፣ በዚህ መለያ ቁጥር የተመዘገበ የላብራቶሪ ውጤት አልተገኘም።</span>";
-            }
-        }
-    </script>
-
-</body>
-</html>
+                text.innerHTML = "<span style='color:red;'>ይቅር
