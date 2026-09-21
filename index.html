@@ -1,4 +1,4 @@
-html<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -15,587 +15,220 @@ html<!DOCTYPE html>
 
     body {
       background-color: #f0f4f8;
-    }
-
-    .app-container {
       display: flex;
       min-height: 100vh;
     }
 
-    /* የጎን ሜኑ (Sidebar) ዲዛይን */
+    /* የግራ ጎን ሜኑ (Sidebar) ዲዛይን */
     .sidebar {
+      height: 100vh;
       width: 260px;
-      background-color: #eef5f9;
-      border-right: 1px solid #d3e2ed;
-      display: flex;
-      flex-direction: column;
-      flex-shrink: 0;
-    }
-
-    .sidebar-brand {
-      padding: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #0056b3;
-      border-bottom: 1px solid #d3e2ed;
-    }
-
-    .sidebar-menu {
-      flex: 1;
+      background: #ffffff;
+      position: fixed;
+      top: 0;
+      left: 0;
       overflow-y: auto;
-      padding: 15px 0;
+      padding: 20px 10px;
+      border-right: 1px solid #e2e8f0;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.05);
     }
 
-    .sidebar-menu ul {
+    .logo-details {
+      padding: 10px 15px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #3b82f6;
+    }
+
+    .logo_name {
+      font-size: 20px;
+      font-weight: bold;
+      color: #1e3a8a;
+    }
+
+    .nav-links {
       list-style: none;
     }
 
-    .sidebar-menu li a {
+    .nav-links li a {
       display: flex;
       align-items: center;
-      padding: 12px 20px;
-      color: #334e68;
       text-decoration: none;
+      padding: 12px 15px;
+      color: #475569;
+      border-radius: 8px;
+      margin-bottom: 5px;
       font-size: 15px;
-      font-weight: 500;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
     }
 
-    .sidebar-menu li a:hover, .sidebar-menu li.active a {
-      background-color: #dbeafe;
-      color: #0056b3;
+    .nav-links li a:hover {
+      background: #eff6ff;
+      color: #3b82f6;
+      font-weight: 600;
     }
 
-    .sidebar-menu li a .icon {
-      margin-right: 12px;
-      font-size: 18px;
-    }
-
-    .menu-heading {
-      padding: 20px 20px 8px 20px;
-      font-size: 12px;
-      font-weight: 700;
-      color: #627d98;
+    .section-title {
+      font-size: 11px;
+      font-weight: bold;
+      color: #94a3b8;
+      padding: 20px 15px 5px 15px;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
 
-    /* ዋናው የይዘት ክፍል (Main Content) */
+    /* ዋናው መመዝገቢያ ፎርም ያለበት ክፍል (ወደ ቀኝ የተገፋ) */
     .main-content {
-      flex: 1;
+      margin-left: 260px;
+      padding: 40px;
+      width: calc(100% - 260px);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .app-container {
+      background-color: #ffffff;
       padding: 30px;
-      overflow-y: auto;
-    }
-
-    .header {
-      text-align: center;
-      padding: 20px;
-      background-color: #0056b3;
-      color: white;
-      border-radius: 8px;
-      margin-bottom: 25px;
-    }
-
-    .header h1 {
-      font-size: 24px;
-      margin-bottom: 5px;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    /* የፎርም ካርዶች ዲዛይን */
-    .card {
-      background: white;
-      padding: 30px;
-      border-radius: 8px;
+      border-radius: 12px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-      margin-bottom: 25px;
+      width: 100%;
+      max-width: 600px;
     }
 
-    .card h2 {
-      color: #0056b3;
-      margin-top: 0;
-      border-bottom: 2px solid #f0f4f8;
-      padding-bottom: 10px;
+    h2 {
+      color: #1e3a8a;
       margin-bottom: 20px;
-      font-size: 20px;
+      font-size: 24px;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 10px;
     }
 
     .form-group {
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
 
     label {
       display: block;
-      margin-bottom: 5px;
-      font-weight: 600;
-      color: #334e68;
+      margin-bottom: 8px;
+      color: #475569;
+      font-weight: 500;
     }
 
     input, select {
       width: 100%;
-      padding: 10px;
-      border: 1px solid #d3e2ed;
-      border-radius: 4px;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
       font-size: 15px;
-      background-color: #fcfdfe;
+      outline: none;
+      transition: border-color 0.3s;
     }
 
     input:focus, select:focus {
-      outline: none;
-      border-color: #0056b3;
-      box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.1);
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
     }
 
     button {
-      width: 100%;
-      padding: 12px;
-      background-color: #0056b3;
+      background-color: #3b82f6;
       color: white;
       border: none;
-      border-radius: 4px;
+      padding: 14px;
+      width: 100%;
+      border-radius: 8px;
       font-size: 16px;
       font-weight: 600;
       cursor: pointer;
-      transition: background-color 0.2s;
+      transition: background-color 0.3s;
     }
 
     button:hover {
-      background-color: #004494;
+      background-color: #2563eb;
     }
 
-    .result-box {
-      margin-top: 20px;
-      padding: 15px;
-      background: #eef5f9;
-      border-radius: 5px;
-      border-left: 4px solid #0056b3;
-    }
-
-    /* ለሞባይል ስክሪን ማስተካከያ */
+    /* ለስልኮች የሚሆን ማስተካከያ (Responsive) */
     @media (max-width: 768px) {
-      .app-container {
+      body {
         flex-direction: column;
       }
       .sidebar {
+        position: relative;
         width: 100%;
+        height: auto;
         border-right: none;
-        border-bottom: 1px solid #d3e2ed;
+        border-bottom: 1px solid #e2e8f0;
       }
       .main-content {
-        padding: 15px;
+        margin-left: 0;
+        width: 100%;
+        padding: 20px;
       }
     }
   </style>
 </head>
 <body>
 
-<div class="app-container">
-  <!-- የጎን ሜኑ (Sidebar) -->
-  <aside class="sidebar">
-    <div class="sidebar-brand">
-      <span class="brand-icon">🔬</span>
-      <h2>Guro Lab</h2>
+  <!-- የግራ ጎን ሜኑ (Sidebar) -->
+  <div class="sidebar">
+    <div class="logo-details">
+      <span class="logo_name">Guro Lab</span>
     </div>
-    
-    <nav class="sidebar-menu">
-      <ul>
-        <li id="menu-dashboard" class="menu-item active"><a href="#" onclick="switchTab('dashboard')"><span class="icon">📊</span> Dashboard</a></li>
-        <li id="menu-reception" class="menu-item"><a href="#" onclick="switchTab('reception')"><span class="icon">📥</span> Reception Flow</a></li>
-        <li id="menu-cashier" class="menu-item"><a href="#" onclick="switchTab('cashier')"><span class="icon">💰</span> Cashier Flow</a></li>
-        <li id="menu-patients" class="menu-item"><a href="#" onclick="switchTab('reception')"><span class="icon">🤒</span> Patients</a></li>
-        <li id="menu-daily" class="menu-item"><a href="#" onclick="switchTab('under-construction')"><span class="icon">💵</span> Daily Collection</a></li>
-        <li id="menu-corporate" class="menu-item"><a href="#" onclick="switchTab('under-construction')"><span class="icon">🖥️</span> Corporate Receipt</a></li>
-        <li id="menu-prepayments" class="menu-item"><a href="#" onclick="switchTab('under-construction')"><span class="icon">💳</span> Prepayments</a></li>
-        <li id="menu-broker" class="menu-item"><a href="#" onclick="switchTab('under-construction')"><span class="icon">🤝</span> Broker Set-Up</a></li>
-        <li id="menu-appointments" class="menu-item"><a href="#" onclick="switchTab('under-construction')"><span class="icon">📅</span> Appointments</a></li>
-        
-        <li class="menu-heading">REPORTS</li>
-        <li id="menu-physician" class="menu-item"><a href="#" onclick="switchTab('under-construction')"><span class="icon">👨‍⚕️</span> Physician List</a></li>
-        <li id="menu-top" class="menu-item"><a href="#" onclick="switchTab('under-construction')"><span class="icon">🏆</span> Top Reception</a></li>
-        <li id="menu-cbo" class="menu-item"><a href="#" onclick="switchTab('under-construction')"><span class="icon">🪪</span> CBO Patient Summary</a></li>
-        
-        <li class="menu-heading">GURO UTILITIES</li>
-        <li id="menu-messaging" class="menu-item"><a href="#" onclick="switchTab('under-construction')"><span class="icon">💬</span> Messaging</a></li>
-        <li id="menu-todo" class="menu-item"><a href="#" onclick="switchTab('under-construction')"><span class="icon">📋</span> ToDo List</a></li>
-        <li id="menu-notes" class="menu-item"><a href="#" onclick="switchTab('under-construction')"><span class="icon">📝</span> Notes</a></li>
-      </ul>
-    </nav>
-  </aside>
+    <ul class="nav-links">
+      <li><a href="#">📊 Dashboard</a></li>
+      <li><a href="#">📥 Reception Flow</a></li>
+      <li><a href="#">💳 Cashier Flow</a></li>
+      <li><a href="#">🤕 Patients</a></li>
+      <li><a href="#">💰 Daily Collection</a></li>
+      <li><a href="#">🖥️ Corporate Receipt</a></li>
+      <li><a href="#">💵 Prepayments</a></li>
+      <li><a href="#">🗂️ Broker Set-Up</a></li>
+      <li><a href="#">📅 Appointments</a></li>
+      
+      <li class="section-title">REPORTS</li>
+      <li><a href="#">👨‍⚕️ Physician List</a></li>
+      <li><a href="#">🗃️ Top Reception</a></li>
+      <li><a href="#">💳 CBO Patient Summary</a></li>
+      
+      <li class="section-title">GURO UTILITIES</li>
+      <li><a href="#">💬 Messaging</a></li>
+      <li><a href="#">📋 ToDo List</a></li>
+      <li><a href="#">📝 Notes</a></li>
+    </ul>
+  </div>
 
-  <!-- ዋናው የይዘት ክፍል (Main Content) -->
-  <main class="main-content">
-    
-    <!-- 1. DASHBOARD TAB -->
-    <div id="tab-dashboard" class="tab-content">
-      <div class="header">
-        <h1>Guro Lab Dashboard</h1>
-        <p>Welcome to Guro Laboratory Management System</p>
-      </div>
-      <div class="container">
-        <div class="card" style="text-align: center; padding: 40px;">
-          <h2>Today's Summary</h2>
-          <p style="font-size: 18px; margin: 15px 0; color: #555;">Welcome back! Select an option from the sidebar to manage your laboratory flow.</p>
-          <div style="display: flex; gap: 20px; justify-content: center; margin-top: 25px;">
-            <div style="background: #eef5f9; padding: 20px; border-radius: 8px; flex: 1; border-top: 4px solid #0056b3;">
-              <h3 style="color: #0056b3; font-size: 24px;">12</h3>
-              <p>Registered Patients</p>
-            </div>
-            <div style="background: #eef5f9; padding: 20px; border-radius: 8px; flex: 1; border-top: 4px solid #28a745;">
-              <h3 style="color: #28a745; font-size: 24px;">9</h3>
-              <p>Completed Tests</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2. RECEPTION / PATIENTS TAB -->
-    <div id="tab-reception" class="tab-content" style="display: none;">
-      <div class="header">
-        <h1>Guro Laboratory</h1>
-        <p>Laboratory test registration and results page</p>
-      </div>
-      <div class="container">
-        <div class="card">
-          <h2>1. Patient registration</h2>
-          <form onsubmit="registerPatient(event)">
-            <div class="form-group">
-              <label>Full name</label>
-              <input type="text" placeholder="Enter the patient's full name." required>
-            </div>
-            <div class="form-group">
-              <label>Phone number</label>
-              <input type="tel" placeholder="09..." required>
-            </div>
-            <div class="form-group">
-              <label>Type of investigation</label>
-              <select>
-                <option>Blood Test</option>
-                <option>Urine Test</option>
-                <option>COVID-19 Test</option>
-                <option>General Checkup</option>
-              </select>
-            </div>
-            <button type="submit">Record successfully.</button>
-          </form>
-        </div>
-
-        <div class="card">
-          <h2>2. Laboratory results index</h2>
-          <div class="form-group">
-            <label>Patient ID</label>
-            <input type="text" id="patientId" placeholder="Example: LAB-101">
-          </div>
-          <button onclick="checkResult()">Search for results</button>
-
-          <div id="resultDisplay" class="result-box" style="display: none;">
-            <strong style="color: #0056b3;">Test Result:</strong>
-            <p id="resultText" style="margin-top: 5px; font-weight: bold;"></p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 3. CASHIER FLOW TAB -->
-    <div id="tab-cashier" class="tab-content" style="display: none;">
-      <div class="header" style="background-color: #28a745;">
-        <h1>Guro Laboratory - Cashier Flow</h1>
-        <p>Billing and Invoice Management</p>
-      </div>
-      <div class="container">
-        <div class="card">
-          <h2>Collect Payment</h2>
-          <form onsubmit="processPayment(event)">
-            <div class="form-group">
-              <label>Patient ID / Name</label>
-Use 
-!DOCTYPE html>
-<html lang="am">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guro Laboratory - ምዝገባ እና ውጤት</title>
-    <style>
-        /* ----------------------------------------------------
-           1. BASE STYLES & RESET
-        ---------------------------------------------------- */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #f0f4f8;
-            color: #333;
-        }
-
-        .app-container {
-            display: flex;
-            min-height: 100vh;
-            width: 100%;
-        }
-
-        /* ----------------------------------------------------
-           2. SIDEBAR STYLING
-        ---------------------------------------------------- */
-        .sidebar {
-            width: 260px;
-            background-color: #eef5f9;
-            border-right: 1px solid #d3e2ed;
-            display: flex;
-            flex-direction: column;
-            flex-shrink: 0;
-        }
-
-        .sidebar-brand {
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #0056b3;
-            font-size: 1.3rem;
-            font-weight: bold;
-            border-bottom: 1px solid #d3e2ed;
-        }
-
-        .sidebar-menu {
-            list-style: none;
-            padding: 15px 0;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .menu-section-title {
-            padding: 10px 20px 5px 20px;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #778ca3;
-            font-weight: bold;
-        }
-
-        .sidebar-menu li a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 20px;
-            color: #4b6584;
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: all 0.2s ease;
-            cursor: pointer;
-        }
-
-        .sidebar-menu li a:hover, 
-        .sidebar-menu li.active a {
-            background-color: #dbe8f4;
-            color: #0056b3;
-            font-weight: 600;
-        }
-
-        /* ----------------------------------------------------
-           3. MAIN CONTENT AREA
-        ---------------------------------------------------- */
-        .main-content {
-            flex-grow: 1;
-            padding: 30px;
-            background-color: #f0f4f8;
-            overflow-y: auto;
-        }
-
-        .hero-banner {
-            background-color: #0056b3;
-            color: white;
-            padding: 25px;
-            border-radius: 8px;
-            text-align: center;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
-        .hero-banner h1 {
-            font-size: 1.8rem;
-            margin-bottom: 8px;
-        }
-
-        .hero-banner p {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-
-        /* Form Card Design */
-        .card {
-            background: white;
-            border-radius: 8px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            border: 1px solid #e1e8ed;
-        }
-
-        .card h2 {
-            color: #0056b3;
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #f0f4f8;
-            padding-bottom: 10px;
-        }
-
-        /* View-container hiding rule */
-        .view-section {
-            display: none;
-        }
-
-        .view-section.active-view {
-            display: block;
-        }
-
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: #2c3e50;
-        }
-
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #cccccc;
-            border-radius: 6px;
-            font-size: 0.95rem;
-            background-color: #fafafa;
-            transition: border-color 0.2s;
-        }
-
-        .btn {
-            width: 100%;
-            padding: 12px;
-            background-color: #0056b3;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .btn:hover {
-            background-color: #00418c;
-        }
-
-        .result-box {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #eef5f9;
-            border-left: 4px solid #0056b3;
-            border-radius: 4px;
-        }
-    </style>
-</head>
-<body>
-
+  <!-- ዋናው የምዝገባ ፎርም ክፍል -->
+  <div class="main-content">
     <div class="app-container">
+      <h2>Patient Registration</h2>
+      <form>
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" placeholder="Enter patient full name" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="09... or 07..." required>
+        </div>
+        
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <select id="gender" required>
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="age">Age</label>
+          <input type="number" id="age" placeholder="Enter age" min="0" required>
+        </div>
+        
+        <button type="submit">Register Patient</button>
+      </form>
+    </div>
+  </div>
 
-        <!-- ====================================================
-             SIDEBAR NAVIGATION COMPONENT
-        ==================================================== -->
-        <aside class="sidebar">
-            <div class="sidebar-brand">
-                🔬 Guro Lab
-            </div>
-            <ul class="sidebar-menu" id="navMenu">
-                <li class="nav-item active" data-target="dashboard"><a href="#">📊 Dashboard</a></li>
-                <li class="nav-item" data-target="reception"><a href="#">📥 Reception Flow</a></li>
-                <li class="nav-item" data-target="cashier"><a href="#">💰 Cashier Flow</a></li>
-                <li class="nav-item" data-target="patients"><a href="#">🧑‍⚕️ Patients</a></li>
-                <li class="nav-item" data-target="collection"><a href="#">💵 Daily Collection</a></li>
-                <li class="nav-item" data-target="corporate"><a href="#">🏢 Corporate Receipt</a></li>
-                <li class="nav-item" data-target="prepayments"><a href="#">💳 Prepayments</a></li>
-                <li class="nav-item" data-target="broker"><a href="#">🤝 Broker Set-Up</a></li>
-                <li class="nav-item" data-target="appointments"><a href="#">📅 Appointments</a></li>
-                
-                <li class="menu-section-title">Reports</li>
-                <li class="nav-item" data-target="physician"><a href="#">👨‍⚕️ Physician List</a></li>
-                <li class="nav-item" data-target="top-reception"><a href="#">🏆 Top Reception</a></li>
-                <li class="nav-item" data-target="cbo-summary"><a href="#">🗂️ CBO Patient Summary</a></li>
-                
-                <li class="menu-section-title">Guro Utilities</li>
-                <li class="nav-item" data-target="messaging"><a href="#">💬 Messaging</a></li>
-                <li class="nav-item" data-target="todo"><a href="#">📋 ToDo List</a></li>
-                <li class="nav-item" data-target="notes"><a href="#">📝 Notes</a></li>
-            </ul>
-        </aside>
-
-        <!-- ====================================================
-             MAIN CORE CONTENT
-        ==================================================== -->
-        <main class="main-content">
-
-            <!-- Hero Banner Branding Section -->
-            <div class="hero-banner">
-                <h1>Guro Laboratory (ጉሮ ላቦራቶሪ)</h1>
-                <p>የላቦራቶሪ ምርመራ መመዝገቢያ እና የውጤት ማውጫ ገጽ</p>
-            </div>
-
-            <!-- VIEW 1: DASHBOARD (ዋናው ገጽ) -->
-            <div id="view-dashboard" class="view-section active-view">
-                <!-- 1. Patient Registration Form Module -->
-                <section class="card">
-                    <h2>1. የታካሚ መመዝገቢያ (Patient registration)</h2>
-                    <form id="registrationForm" onsubmit="registerPatient(event)">
-                        <div class="form-group">
-                            <label for="fullName">ሙሉ ስም (Full name)</label>
-                            <input type="text" id="fullName" placeholder="የታካሚውን ሙሉ ስም ያስገቡ" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="phone">ስልክ ቁጥር (Phone number)</label>
-                            <input type="tel" id="phone" placeholder="09..." required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="testType">የምርመራ ዓይነት (Type of investigation)</label>
-                            <select id="testType">
-                                <option value="Blood Test">የደም ምርመራ (Blood Test)</option>
-                                <option value="Urine Test">የሽንት ምርመራ (Urine Test)</option>
-                                <option value="COVID-19 Test">የኮሮና ምርመራ (COVID-19 Test)</option>
-                                <option value="General Checkup">አጠቃላይ ምርመራ (General Checkup)</option>
-                            </select>
-                        </div>
-                        
-                        <button type="submit" class="btn">በተሳካ ሁኔታ መዝግብ</button>
-                    </form>
-                </section>
-
-                <!-- 2. Laboratory Results Retrieval Card Module -->
-                <section class="card">
-                    <h2>2. የላቦራቶሪ ውጤት ማውጫ</h2>
-                    <div class="form-group">
-                        <label for="patientId">የታካሚ መለያ ቁጥር (Patient ID)</label>
-                        <input type="text" id="patientId" placeholder="ምሳሌ: LAB-101">
-                    </div>
-                    <button type="button" class="btn" onclick="checkResult()">ውጤት ፈልግ</button>
-
-                    <div id="resultDisplay" class="result-box" style="display: none;">
-                        <strong>የምርመራ ውጤት:</strong>
-                        <p id="resultText"></p>
-                    </div>
-                </section>
-            </div>
-
-Use code with caution.ገጽይህ ክፍል በቅርቡ ይበለጽጋል።// NAVIGATION SYSTEM (የገጽ መቀያየሪያ ሎጂክ)document.querySelectorAll('.nav-item').forEach(item => {item.addEventListener('click', function(e) {e.preventDefault();// Active ሜኑ መቀየርdocument.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));this.classList.add('active');const target = this.getAttribute('data-target');const dashboardView = document.getElementById('view-dashboard');const genericView = document.getElementById('view-generic');if (target === 'dashboard') {dashboardView.classList.add('active-view');genericView.classList.remove('active-view');} else {dashboardView.classList.remove('active-view');genericView.classList.add('active-view');// የገጹን ርዕስ በዲናሚክ መቀየርconst pageName = this.innerText.substring(3); // ኢሞጂውን ለመቀነስdocument.getElementById('generic-title').innerText = pageName;document.getElementById('generic-content').innerText = "እንኳን ወደ " + pageName + " ክፍል በሰላም መጡ። የዚህ ክፍል ዝርዝር ስራዎች በቅርቡ እዚህ ይዘረዘራሉ።";}});});function registerPatient(e) {e.preventDefault();alert("ታካሚው በተሳካ ሁኔታ ተመዝግቧል! መለያ ቁጥር: LAB-101");}function checkResult() {
+</body>
+</html>
