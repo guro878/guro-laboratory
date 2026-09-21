@@ -1,5 +1,4 @@
-
-   html<!DOCTYPE html>
+html<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -314,6 +313,4 @@
           <form onsubmit="processPayment(event)">
             <div class="form-group">
               <label>Patient ID / Name</label>
-Use code with caution.Amount Due (ETB)Payment MethodCashCBE BirrTelebirrBank TransferConfirm PaymentFeature Coming SoonThis module is under development🛠️Under ConstructionWe are currently working on this feature. It will be available soon!function switchTab(tabId) {var contents = document.querySelectorAll('.tab-content');contents.forEach(function(content) {content.style.display = 'none';});var menuItems = document.querySelectorAll('.menu-item');menuItems.forEach(function(item) {item.classList.remove('active');});document.getElementById('tab-' + tabId).style.display = 'block';if (tabId === 'reception') {document.getElementById('menu-reception').classList.add('active');document.getElementById('menu-patients').classList.add('active');} else if (tabId === 'cashier') {document.getElementById('menu-cashier').classList.add('active');} else if (tabId === 'dashboard') {document.getElementById('menu-dashboard').classList.add('active');} else {// ለቀሪዎቹ ሊንኮች active ምልክት እንዲይዝevent.currentTarget.parentElement.classList.add('active');}}function registerPatient(e) {e.preventDefault();alert("Patient registered successfully! ID: LAB-101");}function checkResult() {var id = document.getElementById("patientId").value;var display = document.getElementById("resultDisplay");var text = document.getElementById("resultText");if(id.trim() === "") {alert("Please enter a patient ID first!");return;}display.style.display = "block";if(id === "LAB-101") {text.innerHTML = "🔬 Result: Normal - All tests completed successfully.";text.style.color = "green";} else {text.innerHTML = "❌ Notice: No patient found with this ID.";text.style.color = "red";}}function processPayment(e) {e.preventDefault();alert("Payment processed su
-         
-  
+Use 
